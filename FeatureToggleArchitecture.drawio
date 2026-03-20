@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" modified="2024-05-10" agent="Antigravity" version="22.0.0" type="device">
+  <diagram name="Feature Toggle Architecture" id="arch-1">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Clients -->
+        <mxCell id="clients" value="Client Applications&#10;(Web, Mobile, External Microservices)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="274" y="80" width="280" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway / Load Balancer -->
+        <mxCell id="gateway" value="API Gateway / Load Balancer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="274" y="240" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Feature Toggle Service -->
+        <mxCell id="service" value="Feature Toggle Microservice&#10;(NestJS App)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="274" y="360" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="toggles_module" value="Toggles Module" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="service">
+          <mxGeometry x="20" y="50" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="db_module" value="Database Module" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="service">
+          <mxGeometry x="160" y="50" width="100" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- PostgreSQL Database -->
+        <mxCell id="db" value="PostgreSQL Database&#10;(TypeORM)&#10;&#10;Table: FeatureToggles" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="314" y="540" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Connections (Edges) -->
+        <mxCell id="edge_clients_gateway" value="HTTP (HTTPS)" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="clients" target="gateway">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge_gateway_service" value="REST API (JSON)&#10;GET, POST, PATCH, DELETE" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gateway" target="service">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge_service_db" value="TCP Connection&#10;(TypeORM Pool)" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="service" target="db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
